@@ -10,13 +10,14 @@ describe DockingStation do
   end
 
   it "expects the Docking station to store a bike when it is docked" do
-     expect(DockingStation.new).to respond_to(:bike)
+     expect(DockingStation.new).to respond_to(:bikes)
   end
 
   it "Docking Station stores bikes " do
      bike = Bike.new
-     expect(subject.dock(bike)) == bike
+     expect(subject.dock(bike)) == [bike]
   end
+
 
   describe '#release_bike' do
 
@@ -34,10 +35,8 @@ describe DockingStation do
 
   describe '#dock' do
     it 'expects an error to raise when docking at a station at max cap' do
-      bike = Bike.new
-      bike2 = Bike.new
-      subject.dock(bike)
-      expect {subject.dock(bike2)}.to raise_error('Docking station is full')
+      docking_station = DockingStation.new
+      expect {21.times { docking_station.dock Bike.new }}.to raise_error('Docking station is full')
     end
   end
 
