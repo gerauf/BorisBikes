@@ -5,27 +5,40 @@ describe DockingStation do
     expect(DockingStation.new.class).to eq DockingStation
   end
 
-  it "a bike has to be released when release_bike is called" do
-    expect(DockingStation.new.release_bike.class).to eq Bike
-  end
-
-  it "expects that when a bike is released it will be working" do
-    expect(DockingStation.new.release_bike.working?).to eq true
-  end
-
   it "expects the Docking station to be able to dock a bike" do
     expect(DockingStation.new).to respond_to(:dock).with(1).argument
   end
 
-   it "expects the Docking station to store a bike when it is docked" do
+  it "expects the Docking station to store a bike when it is docked" do
      expect(DockingStation.new).to respond_to(:bike)
-   end
+  end
 
-   it "Docking Station stores bikes " do
+  it "Docking Station stores bikes " do
      bike = Bike.new
      expect(subject.dock(bike)) == bike
-   end
+  end
+
+  describe '#release_bike' do
+
+    it 'releases a bike after one has been added' do
+      bike = Bike.new
+      subject.dock(bike)
+      expect(subject.release_bike).to eq bike
+    end
+
+    it "will raise an error when a customer takes a bike from an empty docking station" do
+      expect { DockingStation.new.release_bike}.to raise_error('There are no bikes left!')
+    end
+  end
 
 
+  describe '#dock' do
+    it 'expects an error to raise when docking at a station at max cap' do
+      bike = Bike.new
+      bike2 = Bike.new
+      subject.dock(bike)
+      expect {subject.dock(bike2)}.to raise_error('Docking station is full')
+    end
+  end
 
 end
