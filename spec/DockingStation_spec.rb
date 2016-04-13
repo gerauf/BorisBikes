@@ -36,7 +36,7 @@ describe DockingStation do
   describe '#dock' do
     it 'expects an error to raise when docking at a station at max cap' do
       docking_station = DockingStation.new
-      expect {21.times { docking_station.dock Bike.new }}.to raise_error('Docking station is full')
+      expect {(DockingStation::DEFAULT_CAPACITY+1).times { docking_station.dock Bike.new }}.to raise_error('Docking station is full')
     end
   end
 
