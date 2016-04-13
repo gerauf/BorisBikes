@@ -36,8 +36,16 @@ describe DockingStation do
   describe '#dock' do
     it 'expects an error to raise when docking at a station at max cap' do
       docking_station = DockingStation.new
-      expect {(DockingStation::DEFAULT_CAPACITY+1).times { docking_station.dock Bike.new }}.to raise_error('Docking station is full')
+      expect {(DockingStation.new(25).capacity+1).times { docking_station.dock Bike.new }}.to raise_error('Docking station is full')
     end
+  end
+
+  it 'expects docking station to be able to initialize with 1 argument' do
+    expect(DockingStation.new(25).capacity).to eq 25
+  end
+
+  it 'expects new instance of docking station without an argument to default to 20' do
+    expect(DockingStation.new.capacity).to eq 20
   end
 
 end
