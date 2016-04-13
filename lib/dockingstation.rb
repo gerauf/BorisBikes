@@ -14,9 +14,8 @@ DEFAULT_CAPACITY = 20
     raise "There are no working bikes left!"
   end
 
-  def dock(bike, status = '')
+  def dock(bike)
     raise "Docking station is full" if full?
-    bike.working = false if status == "broken"
     @bikes << bike
   end
 
@@ -37,5 +36,10 @@ class Bike
   def initialize
     @working = true
   end
+
+  def report_broken
+    @working = false
+  end
+
 
 end

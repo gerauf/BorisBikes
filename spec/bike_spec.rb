@@ -10,4 +10,9 @@ describe Bike do
     bike.working = false
     expect(bike.working).to eq false
   end
+
+  it 'expects a bikes working attribute to change to false if the bike is reported broken' do
+    subject.report_broken
+    expect(subject.working).to eq false
+  end
 end
