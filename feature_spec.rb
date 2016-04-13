@@ -4,5 +4,8 @@ require_relative './lib/bike.rb'
 station = DockingStation.new
 bike = Bike.new
 
-p station.dock(bike)
-p station.release_bike
+
+station1 = DockingStation.new(5)
+
+p station.capacity
+p station1.capacity
