@@ -4,4 +4,9 @@
     # expect(subject).to respond_to :release_bike
     it { is_expected.to respond_to :release_bike }
 
+    it "gets a bike" do
+      bicycle = subject.release_bike
+      expect(bicycle).to be_working
+    end
+
   end
