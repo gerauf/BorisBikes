@@ -10,11 +10,13 @@ DEFAULT_CAPACITY = 20
 
   def release_bike
     raise "There are no bikes left!" if empty?
-    @bikes.pop
+    @bikes.each {|bike| return bike if bike.working}
+    raise "There are no working bikes left!"
   end
 
-  def dock(bike)
+  def dock(bike, status = '')
     raise "Docking station is full" if full?
+    bike.working = false if status == "broken"
     @bikes << bike
   end
 
@@ -30,7 +32,10 @@ DEFAULT_CAPACITY = 20
 end
 
 class Bike
-  def working?
-    true
+  attr_accessor :working
+
+  def initialize
+    @working = true
   end
+
 end
