@@ -4,7 +4,7 @@ describe DockingStation do
   # expect(subject).to respond_to :release_bike
   it { is_expected.to respond_to :release_bike }
 
-  it "gets a bike" do
+  it "gets a bike from the docking station" do
     bike = Bike.new
     subject.dock(bike)
     subject.release_bike
@@ -15,7 +15,7 @@ describe DockingStation do
 
   it "docks a bike" do
     bike = Bike.new
-    expect(subject.dock(bike)).to eq bike
+    expect(subject.dock(bike)).to eq [bike]
   end
 
   it "returns docked bikes" do
@@ -42,6 +42,31 @@ describe DockingStation do
 
     it "raises error when no bike available" do
       expect { subject.release_bike}.to raise_error("No bike in dock!")
+    end
+
+    it "raises error if trying to release a broken bike" do
+      bike = Bike.new
+      bike.report_broken
+      subject.dock(bike)
+      expect {subject.release_bike}.to raise_error("All available bikes are broken")
+    end
+
+    it "if first bike is broken, release next bike" do
+      broken_bike = Bike.new
+      broken_bike.report_broken
+      subject.dock(broken_bike)
+      working_bike = Bike.new
+      subject.dock(working_bike)
+      expect(subject.release_bike).to eq working_bike
+    end
+
+    it "if there is a working bike, release it regardless of number of broken bikes" do
+      working_bike = Bike.new
+      subject.dock(working_bike)
+      broken_bike = Bike.new
+      broken_bike.report_broken
+      subject.dock(broken_bike)
+      expect(subject.release_bike).to eq working_bike
     end
   end
 

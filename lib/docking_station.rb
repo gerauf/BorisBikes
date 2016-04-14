@@ -11,13 +11,13 @@ class DockingStation
 
   def release_bike
     fail "No bike in dock!" if empty?
-    @bikes.pop
+    bikes.find{|bike| return bike if bike.working?}
+    fail "All available bikes are broken"
   end
 
   def dock(bike)
     fail "Dock is full!" if full?
     @bikes << bike
-    bike
   end
 
   private
@@ -27,7 +27,7 @@ class DockingStation
   end
 
   def full?
-    @bikes.count >= @capacity
+    @bikes.count >= capacity
   end
 
 end
