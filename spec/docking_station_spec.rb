@@ -45,6 +45,12 @@ describe DockingStation do
 			expect(subject.release_bike).to eq bike
 		end
 
+		it "after a bike has been released it will not exist in the bikes array anymore" do
+			subject.dock(bike)
+			subject.release_bike
+			expect(subject.bikes).to eq []
+		end
+
 	end
 
 	describe '#dock' do
