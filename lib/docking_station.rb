@@ -32,6 +32,4 @@ class DockingStation
 	def empty?
 		bikes.count == 0
 	end
-
-
 end

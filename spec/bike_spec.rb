@@ -13,9 +13,4 @@ it 'expects a bikes "working" attribute to be false after a bike has been report
   expect(subject.working?).to be_falsey
 end
 
-  # it "gets broken" do
-  #   expect(subject).to be_broken
-  # end
-
-  #end
 end
