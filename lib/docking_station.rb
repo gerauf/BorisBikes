@@ -13,11 +13,11 @@ class DockingStation
 	end
 
 	def release_bike
-			fail "No bikes" if empty?
-			raise "No working bikes" if bikes.find{|bike| bike.working?} == nil
-			bikes.each_with_index do |bike,index|
-				return bikes.slice!(index) if bike.working?
-			end
+		fail "No bikes" if empty?
+		bikes.each_with_index do |bike,index|
+			return bikes.slice!(index) if bike.working?
+		end
+		raise "No working bikes"
 	end
 
 	def dock(bike)
