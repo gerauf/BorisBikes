@@ -13,8 +13,9 @@ class DockingStation
 
 	def release_bike(bike)
 			fail "No bikes" if empty?
-			raise "bike is broken" if !(bike.working?)
-			bikes.pop
+			raise "bike is broken" if bike.broken?
+
+				bikes.pop
 
 	end
 
