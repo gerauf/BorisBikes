@@ -25,6 +25,9 @@ class DockingStation
 		bikes << bike
 	end
 
+	# need a method to except multiple bikes
+	# need a method to release all broken bikes
+
 	private
 
 

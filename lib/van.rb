@@ -10,6 +10,7 @@ class Van
   def pick_up(item)
     raise "piss off Ferg" if full?
     storage << item
+    storage.flatten!
   end
 
   def list_stored_items
@@ -19,7 +20,6 @@ class Van
   def drop_off_items
     storage.pop(storage.size)
   end
-
 
 # The following two methods could be DRY by using a third private method based on status
   def drop_off_broken_items
